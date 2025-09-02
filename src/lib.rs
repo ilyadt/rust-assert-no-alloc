@@ -35,7 +35,7 @@ compile_error!("disable_release cannot be active at the same time with warn_rele
 thread_local! {
 	static ALLOC_FORBID_COUNT: Cell<u32> = Cell::new(0);
 	static ALLOC_PERMIT_COUNT: Cell<u32> = Cell::new(0);
-	
+
 	#[cfg(any( all(feature="warn_debug", debug_assertions), all(feature="warn_release", not(debug_assertions)) ))]
 	static ALLOC_VIOLATION_COUNT: Cell<u32> = Cell::new(0);
 }
@@ -108,7 +108,7 @@ pub fn permit_alloc<T, F: FnOnce() -> T> (func: F) -> T {
 			ALLOC_PERMIT_COUNT.with(|c| c.set(c.get()-1));
 		}
 	}
-	
+
 	let guard = Guard::new(); // increment the forbid counter
 	let ret = func();
 	std::mem::drop(guard);    // decrement the forbid counter
@@ -183,7 +183,6 @@ unsafe impl GlobalAlloc for AllocDisabler {
 	}
 
 	unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
-		self.check(layout);
 		System.dealloc(ptr, layout)
 	}
 }
