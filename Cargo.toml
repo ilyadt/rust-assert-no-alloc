@@ -1,5 +1,5 @@
 [package]
-name = "assert-no-alloc"
+name = "assert-no-alloc-patched"
 version = "1.1.2"
 authors = ["Florian Jung <flo@windfis.ch>"]
 edition = "2018"
