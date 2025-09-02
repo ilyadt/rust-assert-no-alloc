@@ -1,4 +1,5 @@
-assert_no_alloc
+FORK of [assert_no_alloc](https://crates.io/crates/assert_no_alloc) with removed dealloc checks.
+
 ===============
 
 This crate provides a custom allocator that allows to temporarily disable
